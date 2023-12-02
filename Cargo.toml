@@ -1,0 +1,14 @@
+[package]
+name = "simple-regex"
+version = "1.0.0"
+authors = ["Animemchik"]
+description = "😎 Simple and readable way of writing regular expressions"
+readme = "../README.md"
+repository = "https://github.com/Animemchik/simple-regex"
+license = "MIT"
+keywords = ["regexpr", "regular", "regex", "human-readable", "simple", "easy"]
+categories = ["regex"]
+edition = "2021"
+
+[dependencies]
+regex = "1.9.3"
