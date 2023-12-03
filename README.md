@@ -1,4 +1,4 @@
-# My Regex Builder
+# Simple Regex Library
 
 A simple Rust library for building regular expressions.
 
