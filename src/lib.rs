@@ -143,7 +143,7 @@ pub mod ansi {
 /// Builder for constructing regular expressions.
 #[derive(Clone)]
 pub struct RegexBuilder {
-    value: String
+    pub value: String
 }
 
 impl RegexBuilder {
@@ -207,7 +207,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().literal('a').build();
     /// assert_eq!(regex, "a");
@@ -216,13 +216,29 @@ impl RegexBuilder {
         self.value.push(char_);
         self.clone()
     }
+
+
+    /// Appends a string to the regular expression.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use simple_regex::RegexBuilder;
+    ///
+    /// let regex = RegexBuilder::new().string("word").build();
+    /// assert_eq!(regex, "word");
+    /// ```
+    pub fn string(&mut self, string: &str) -> Self {
+        self.value.push_str(string);
+        self.clone()
+    }
     
     /// Appends a dot (.) to the regular expression, matching any single character.
     ///
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().dot().build();
     /// assert_eq!(regex, ".");
@@ -237,7 +253,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().escape('[').build();
     /// assert_eq!(regex, "\\[");
@@ -253,7 +269,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().start_of_line().build();
     /// assert_eq!(regex, "^");
@@ -268,7 +284,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().end_of_line().build();
     /// assert_eq!(regex, "$");
@@ -283,7 +299,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().character_class("abc").build();
     /// assert_eq!(regex, "[abc]");
@@ -300,7 +316,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().negated_character_class("abc").build();
     /// assert_eq!(regex, "[^abc]");
@@ -318,7 +334,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().range_character_class('a', 'z').build();
     /// assert_eq!(regex, "[a-z]");
@@ -337,7 +353,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().digit().build();
     /// assert_eq!(regex, "\\d");
@@ -352,7 +368,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().non_digit().build();
     /// assert_eq!(regex, "\\D");
@@ -367,7 +383,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().word_character().build();
     /// assert_eq!(regex, "\\w");
@@ -382,7 +398,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().non_word_character().build();
     /// assert_eq!(regex, "\\W");
@@ -397,7 +413,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().whitespace().build();
     /// assert_eq!(regex, "\\s");
@@ -412,7 +428,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().non_whitespace().build();
     /// assert_eq!(regex, "\\S");
@@ -427,7 +443,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .zero_or_more(RegexBuilder::new().character_class("a"))
@@ -445,7 +461,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .one_or_more(RegexBuilder::new().character_class("a"))
@@ -463,7 +479,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .zero_or_one(RegexBuilder::new().character_class("a"))
@@ -481,7 +497,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .exact_repetitions(RegexBuilder::new().digit(), 3)
@@ -498,7 +514,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .min_repetitions(RegexBuilder::new().digit(), 3)
@@ -515,7 +531,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .range_repetitions(RegexBuilder::new().digit(), 3, 5)
@@ -532,7 +548,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .group(RegexBuilder::new().character_class("ab"))
@@ -551,7 +567,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .capturing_group(RegexBuilder::new().character_class("ab"))
@@ -569,7 +585,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().word_boundary().build();
     /// assert_eq!(regex, "\\b");
@@ -584,7 +600,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new().non_word_boundary().build();
     /// assert_eq!(regex, "\\B");
@@ -599,7 +615,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .case_insensitive(RegexBuilder::new().character_class("a"))
@@ -616,7 +632,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .global_search(RegexBuilder::new().character_class("a"))
@@ -633,7 +649,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .multiline(RegexBuilder::new().character_class("a"))
@@ -650,7 +666,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .dot_all(RegexBuilder::new().character_class("a"))
@@ -667,7 +683,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .alternative(RegexBuilder::new().character_class("a"), RegexBuilder::new().character_class("b"))
@@ -684,7 +700,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .capturing_group(RegexBuilder::new().character_class("ab"))
@@ -703,7 +719,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .non_capturing_group(RegexBuilder::new().character_class("ab"))
@@ -722,7 +738,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .bound_word(RegexBuilder::new().character_class("a"))
@@ -739,7 +755,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .negative_word_boundary(RegexBuilder::new().character_class("a"))
@@ -756,7 +772,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .positive_lookahead(RegexBuilder::new().character_class("a"))
@@ -773,7 +789,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .negative_lookahead(RegexBuilder::new().character_class("a"))
@@ -790,7 +806,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .positive_lookbehind(RegexBuilder::new().character_class("a"))
@@ -807,7 +823,7 @@ impl RegexBuilder {
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .negative_lookbehind(RegexBuilder::new().character_class("a"))
@@ -819,12 +835,30 @@ impl RegexBuilder {
         self.clone()
     }
     
+    /// Appends an optional pattern to the regular expression, allowing the given pattern to match zero or one time.
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use simple_regex::RegexBuilder;
+    ///
+    /// let regex = RegexBuilder::new()
+    ///     .optional(RegexBuilder::new().literal('a'))
+    ///     .build();
+    /// assert_eq!(regex, "(a)?");
+    /// ```
+    pub fn optional(&mut self, regex: RegexBuilder) -> Self {
+        self.value.push_str(&format!("({})?", regex.build()));
+        self.clone()
+    }
+
+    
     /// Builds the regular expression as a string.
     ///
     /// # Example
     ///
     /// ```
-    /// use my_regex_builder::RegexBuilder;
+    /// use simple_regex::RegexBuilder;
     ///
     /// let regex = RegexBuilder::new()
     ///     .literal('a')

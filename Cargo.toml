@@ -1,6 +1,6 @@
 [package]
 name = "simple-regex"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Animemchik"]
 description = "😎 Simple and readable way of writing regular expressions"
 readme = "../README.md"
