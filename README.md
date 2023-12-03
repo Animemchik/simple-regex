@@ -32,7 +32,7 @@ Builder for constructing regular expressions.
 | Function                                                             | Description                                                                                  | Example                                                                                            | Result                                     |
 | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------ |
 | `new() -> Self`                                                      | Creates a new instance of `RegexBuilder`.                                                    | `RegexBuilder::new()`                                                                              | `RegexBuilder` instance                    |
-| `literal(char) -> Self`                                              | Appends a literal character to the regex.                                                    | `.literal('a')`                                                                                    | "a"                                        |
+| `literal(char) -> Self`                                              | Appends a literal character to the regex.                                                    | `.literal('a')`                                                                                    | "\\a"                                      |
 | `string(char) -> Self`                                               | Appends a string to the regex.                                                               | `.string("word")`                                                                                  | "word"                                     |
 | `dot() -> Self`                                                      | Appends a dot (.) to the regex, matching any single character.                               | `.dot()`                                                                                           | "."                                        |
 | `escape(char) -> Self`                                               | Appends an escaped character to the regex.                                                   | `.escape('[')`                                                                                     | "\\["                                      |
@@ -64,6 +64,7 @@ Builder for constructing regular expressions.
 | `alternative(regex1: RegexBuilder, regex2: RegexBuilder) -> Self`    | Appends an alternative (\|) to the regex, allowing either of the provided patterns to match. | `.alternative(RegexBuilder::new().character_class("a"), RegexBuilder::new().character_class("b"))` | "[a]\|[b]"                                 |
 | `capturing_group(regex: RegexBuilder) -> Self`                       | Appends a capturing group to the regex.                                                      | `.capturing_group(RegexBuilder::new().character_class("a"))`                                       | "([a])"                                    |
 | `optional(regex: RegexBuilder) -> Self`                              | Appends the given pattern to match zero or one time to the regex.                            | `.optional(RegexBuilder::new().character_class("a"))`                                              | "([a])?"                                   |
+| `dash_space_character_class() -> Self`                               | Appends to the regular expression the character class `[-\\s]`.                              | `.dash_space_character_class()`                                                                    | "[-\\s]"                                   |
 | `to_regex()`                                                         | Converts the current `RegexBuilder` into a `Regex` object.                                   |                                                                                                    | "Returns a `Result<Regex, regex::Error>`." |
 | `to_regex_or_panic()`                                                | Converts the current `RegexBuilder` into a `Regex` object or panics if an error occurs.      |                                                                                                    | "Returns a `Regex` object."                |
 
@@ -84,5 +85,7 @@ use simple_regex::RegexBuilder;
 let regex = RegexBuilder::new().literal('a').build();
 assert_eq!(regex, "a");
 ```
+
+More examples in https://github.com/Animemchik/simple-regex/tree/main/examples
 
 Please make sure to adjust the version number in the dependency based on the latest release.
